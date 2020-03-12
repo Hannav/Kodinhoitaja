@@ -1,2 +1,2 @@
 # Kodinhoitaja
-Talouden yhteinen muisti elintarvikkeiden ostoslistoille sekä kodin tarpeellisille toimenpiteille.
+Talouden yhteinen muisti elintarvikkeiden ostoslistoille sekä kotiin liittyville toimenpiteille.
