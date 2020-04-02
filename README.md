@@ -3,4 +3,4 @@ Kotitalouden yhteinen muisti elintarvikkeiden ja muiden hankintojen ostoslistoil
 
 Kotiin ja mökille!
 
-[Alustava tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/Kodinhoitaja_tietokantakaavio.pdf)
+[Alustava tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/tietokantakaavio.png)
