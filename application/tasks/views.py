@@ -1,6 +1,8 @@
+from flask import render_template, request, redirect, url_for
+
 from application import app, db
-from flask import redirect, render_template, request, url_for
 from application.tasks.models import Task
+from application.tasks.forms import TaskForm
 
 @app.route("/tasks", methods=["GET"])
 def tasks_index():
@@ -8,7 +10,7 @@ def tasks_index():
 
 @app.route("/tasks/new/")
 def tasks_form():
-    return render_template("tasks/new.html")
+    return render_template("tasks/new.html", form = TaskForm())
   
 @app.route("/tasks/<task_id>/", methods=["POST"])
 def tasks_set_done(task_id):
@@ -19,11 +21,18 @@ def tasks_set_done(task_id):
   
     return redirect(url_for("tasks_index"))
 
+#https://wtforms.readthedocs.io/en/stable/validators.html
 @app.route("/tasks/", methods=["POST"])
 def tasks_create():
-    t = Task(request.form.get("name"))
+    form = TaskForm(request.form)
+
+    if not form.validate():
+        return render_template("tasks/new.html", form = form)
+
+    t = Task(form.name.data)
+    t.done = form.done.data
 
     db.session().add(t)
     db.session().commit()
-  
+
     return redirect(url_for("tasks_index"))
