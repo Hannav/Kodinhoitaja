@@ -2,16 +2,20 @@
 from flask import Flask
 app = Flask(__name__)
 
-#favicon
+from flask_sqlalchemy import SQLAlchemy
+
+import os
+
+# favicon
 #app.add_url_rule('/favicon.ico',
 #                 redirect_to=url_for('static', filename='favicon.ico'))
 
 # tietokanta
-from flask_sqlalchemy import SQLAlchemy
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
-app.config["SQLALCHEMY_ECHO"] = True
-
-db = SQLAlchemy(app)
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"    
+    app.config["SQLALCHEMY_ECHO"] = True
 
 # oman sovelluksen toiminnallisuudet
 from application import views
@@ -38,5 +42,7 @@ login_manager.login_message = "Please login to use this functionality."
 def load_user(user_id):
     return User.query.get(user_id)
 
-# luodaan taulut tietokantaan tarvittaessa
-db.create_all()
+try: 
+    db.create_all()
+except:
+    pass
