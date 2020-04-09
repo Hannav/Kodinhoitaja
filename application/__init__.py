@@ -2,6 +2,10 @@
 from flask import Flask
 app = Flask(__name__)
 
+#favicon
+#app.add_url_rule('/favicon.ico',
+#                 redirect_to=url_for('static', filename='favicon.ico'))
+
 # tietokanta
 from flask_sqlalchemy import SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"

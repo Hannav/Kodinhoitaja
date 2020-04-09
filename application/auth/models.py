@@ -14,14 +14,14 @@ class User(db.Model):
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
-    def __init__(self, name, username, password):
-        self.name = name
-        self.username = username
-        self.password = password
+    tasks = db.relationship("Task", backref='account', lazy=True)
   
+    def __init__(self, name):
+        self.name = name
+        
     def get_id(self):
         return self.id
-
+  
     def is_active(self):
         return True
 
