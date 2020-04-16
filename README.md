@@ -1,5 +1,5 @@
 # Kodinhoitaja
-Kotitalouden yhteinen muisti ostoslistoille sekä kotiin liittyville toimenpiteille. 
+Kotitalouden yhteinen muisti ostoslistoille sekä kotitöille. 
 
 Kotiin ja mökille!
 
