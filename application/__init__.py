@@ -1,4 +1,3 @@
-# flask-sovellus
 from flask import Flask
 app = Flask(__name__)
 
@@ -6,18 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os
 
-# favicon
-#app.add_url_rule('/favicon.ico',
-#                 redirect_to=url_for('static', filename='favicon.ico'))
-
-# tietokanta
 if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"    
     app.config["SQLALCHEMY_ECHO"] = True
+  
+db = SQLAlchemy(app)
 
-# oman sovelluksen toiminnallisuudet
 from application import views
 
 from application.tasks import models
@@ -26,7 +21,7 @@ from application.tasks import views
 from application.auth import models
 from application.auth import views
 
-# kirjautuminen
+# login
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
