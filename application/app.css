@@ -1,0 +1,11 @@
+html {
+    background: black;
+    background-size: cover;
+}
+
+button {
+    background-color: white;
+    border-style: none;
+    padding: 1px 0px 2px;
+    outline: 0 !important;
+}
