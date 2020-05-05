@@ -7,10 +7,3 @@ class TaskForm(FlaskForm):
   
     class Meta:
         csrf = False
-
-'''class ShoppingForm(FlaskForm):
-    name = StringField("Lisää ostoslistalle", [validators.Length(min=2)])
-    done = BooleanField("Ostettu")
-
-    class Meta:
-        csrf = False'''
