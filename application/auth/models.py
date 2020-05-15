@@ -43,3 +43,9 @@ class User(Base):
             response.append({"id":row[0], "name":row[1]})
 
         return response
+    
+    @staticmethod
+    def create_user(username, password):
+        stmt = text("INSERT INTO account (name, username, password) VALUES (:username, :username, :password)"
+            ).params(username=username, password=password)
+        db.engine.execute(stmt)
