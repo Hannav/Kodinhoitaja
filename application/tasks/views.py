@@ -15,7 +15,16 @@ def tasks_index():
 def tasks_form():
     return render_template("tasks/new.html", form = TaskForm())
 
-  
+@app.route("/tasks/<task_id>/", methods=["POST"])
+@login_required
+def tasks_delete(task_id):
+
+    Task.delete_task(task_id)
+    
+    return redirect(url_for("tasks_index"))
+
+#Miten saa tasks_delete ja tasks_set_done (tai statuksen jatkuva vaihto) toimimaan molemmat?
+
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
 def tasks_set_done(task_id):
@@ -25,6 +34,16 @@ def tasks_set_done(task_id):
     db.session().commit()
   
     return redirect(url_for("tasks_index"))
+
+#@app.route("/tasks/<task_id>/", methods=["POST"])
+#@login_required
+#def tasks_set_false(task_id):
+#
+#    t = Task.query.get(task_id)
+#    t.done = False
+#    db.session().commit()
+#  
+#    return redirect(url_for("tasks_index"))
 
 @app.route("/tasks/", methods=["POST"])
 @login_required
@@ -42,3 +61,6 @@ def tasks_create():
     db.session().commit()
   
     return redirect(url_for("tasks_index"))
+
+######
+
