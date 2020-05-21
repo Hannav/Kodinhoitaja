@@ -23,17 +23,25 @@ def tasks_form():
 
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
-def tasks_delete(task_id):
+def tasks_operation(task_id):
 
     form = OperationForm(request.form)
     
     if not form.validate():
+        print("ERROR: OPERATIONFORM ERROR")
         print(form.data)
         print(form.errors)
-        print(form.meta)
         return redirect(url_for("tasks_index"))
 
-    Task.delete_task(task_id)
+    print(form.data)
+    if form.data["operation"] == 'Muuta status':
+        print("MUUTA STATUS")
+
+    if form.data["operation"] == 'Poista':
+        Task.delete_task(task_id)
+
+    if form.data["operation"] == 'Muokkaa':
+        print("MUOKKAA")
     
     return redirect(url_for("tasks_index"))
 
@@ -47,24 +55,24 @@ def tasks_delete(task_id):
 #  
 #    return redirect(url_for("tasks_index"))
 
-@app.route("/tasks/<task_id>/", methods=["POST"])
-@login_required
-def tasks_set_done(task_id):
+#@app.route("/tasks/<task_id>/", methods=["POST"])
+#@login_required
+#def tasks_set_done(task_id):
 #muuta tasks_set_booleaniksi
 
-    t = Task.query.get(task_id)
-    t.done = True
-    db.session().commit()
-  
-    return redirect(url_for("tasks_index"))
+#    t = Task.query.get(task_id)
+#    t.done = True
+#    db.session().commit()
+#  
+#    return redirect(url_for("tasks_index"))
 
-@app.route("/tasks/<task_id>/", methods=["POST"])
+"""@app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
 def tasks_modify(task_id):
 
     Task.modify_task(task_id)
     
-    return redirect(url_for("tasks_index"))
+    return redirect(url_for("tasks_index"))"""
 
 @app.route("/tasks/", methods=["POST"])
 @login_required
