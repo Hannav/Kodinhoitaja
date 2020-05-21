@@ -14,8 +14,25 @@ class Task(Base):
         self.name = name
         self.done = False
 
+#    @staticmethod
+#    def boolean_task(id):
+#        stmt = text("DELETE FROM task WHERE (id = :id)"
+#            ).params(id=id) 
+#        db.engine.execute(stmt)
+#
+#UPDATE
+# Customers
+#SET
+# City = 'Oslo';
+
     @staticmethod
     def delete_task(id):
         stmt = text("DELETE FROM task WHERE (id = :id)"
             ).params(id=id) 
         db.engine.execute(stmt)
+
+    #@staticmethod
+    #def modify_task(id, ???):
+        #stmt = text("UPDATE task SET name = ('???') WHERE (id = :id)"
+        #    ).params(id=id) 
+    #    db.engine.execute(stmt)

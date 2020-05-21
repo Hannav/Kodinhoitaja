@@ -3,10 +3,11 @@ from flask_login import login_required, current_user
 
 from application import app, db
 from application.tasks.models import Task
-from application.tasks.forms import TaskForm
+from application.tasks.forms import TaskForm, OperationForm
 
 
 @app.route("/tasks/", methods=["GET"])
+@login_required
 def tasks_index():
     return render_template("tasks/list.html", tasks = Task.query.all())
 
@@ -15,19 +16,41 @@ def tasks_index():
 def tasks_form():
     return render_template("tasks/new.html", form = TaskForm())
 
+#@app.route("/tasks/modify/")
+#@login_required
+#def tasks_modify(task_id):
+#    return render_template("tasks/modify.html", form = TaskForm())
+
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
 def tasks_delete(task_id):
+
+    form = OperationForm(request.form)
+    
+    if not form.validate():
+        print(form.data)
+        print(form.errors)
+        print(form.meta)
+        return redirect(url_for("tasks_index"))
 
     Task.delete_task(task_id)
     
     return redirect(url_for("tasks_index"))
 
-#Miten saa tasks_delete ja tasks_set_done (tai statuksen jatkuva vaihto) toimimaan molemmat?
+#Miten saa tasks_delete, tasks_set_done (tai statuksen jatkuva vaihto), tasks_modify toimimaan molemmat?
+
+#@app.route("/tasks/<task_id>/", methods=["POST"])
+#@login_required
+#def tasks_boolean(task_id):
+#
+#    Task.boolean_task(task_id)
+#  
+#    return redirect(url_for("tasks_index"))
 
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
 def tasks_set_done(task_id):
+#muuta tasks_set_booleaniksi
 
     t = Task.query.get(task_id)
     t.done = True
@@ -35,15 +58,13 @@ def tasks_set_done(task_id):
   
     return redirect(url_for("tasks_index"))
 
-#@app.route("/tasks/<task_id>/", methods=["POST"])
-#@login_required
-#def tasks_set_false(task_id):
-#
-#    t = Task.query.get(task_id)
-#    t.done = False
-#    db.session().commit()
-#  
-#    return redirect(url_for("tasks_index"))
+@app.route("/tasks/<task_id>/", methods=["POST"])
+@login_required
+def tasks_modify(task_id):
+
+    Task.modify_task(task_id)
+    
+    return redirect(url_for("tasks_index"))
 
 @app.route("/tasks/", methods=["POST"])
 @login_required
@@ -61,6 +82,3 @@ def tasks_create():
     db.session().commit()
   
     return redirect(url_for("tasks_index"))
-
-######
-

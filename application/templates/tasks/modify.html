@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('tasks_create') }}">
+<form method="POST" action="{{ url_for('tasks_modify') }}">
   <table>
     <tr>
   <td>
@@ -30,7 +30,7 @@
     </tr>
     <tr>
   <td colspan="3">
-    <input type="submit" value="Lisää pakattava"/>
+    <input type="submit" value="Muuta nimi"/>
   </td>
     </tr>
 </form>

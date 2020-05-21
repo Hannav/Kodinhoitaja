@@ -18,12 +18,7 @@ def auth_login():
     if not user:
         return render_template("auth/loginform.html", form = form,
                                 error = "Virheellinen käyttäjätunnus tai salasana")
-
-    #poista nämä jossain vaiheessa
-    #print("Käyttäjä " + user.name + " tunnistettiin")
-    #return redirect(url_for("index"))
-
-    #tämä login_user(user) puuttuu esimerkki koodista
+                                
     login_user(user)
     return redirect(url_for("index"))
 
@@ -47,10 +42,5 @@ def auth_create():
         return render_template("auth/createform.html", form = form,
                                 error = "Käyttäjätunnuksen luominen ei onnistunut")
     
-    #poista nämä jossain vaiheessa
-    #print("Käyttäjä " + user.name + " tunnistettiin")
-    #return redirect(url_for("index"))
-
-    #tämä login_user(user) puuttuu esimerkki koodista
     login_user(user)
     return redirect(url_for("index"))
