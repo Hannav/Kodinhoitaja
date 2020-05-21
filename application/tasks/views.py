@@ -26,6 +26,7 @@ def tasks_form():
 def tasks_operation(task_id):
 
     form = OperationForm(request.form)
+    t = Task.query.get(task_id)
     
     if not form.validate():
         print("ERROR: OPERATIONFORM ERROR")
@@ -35,7 +36,13 @@ def tasks_operation(task_id):
 
     print(form.data)
     if form.data["operation"] == 'Muuta status':
-        print("MUUTA STATUS")
+        print(t.done)
+        if t.done == True:
+            Task.booleanToFalse_task(task_id)
+        else:
+            Task.booleanToTrue_task(task_id)
+        
+        db.session().commit()
 
     if form.data["operation"] == 'Poista':
         Task.delete_task(task_id)

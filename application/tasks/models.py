@@ -14,16 +14,17 @@ class Task(Base):
         self.name = name
         self.done = False
 
-#    @staticmethod
-#    def boolean_task(id):
-#        stmt = text("DELETE FROM task WHERE (id = :id)"
-#            ).params(id=id) 
-#        db.engine.execute(stmt)
-#
-#UPDATE
-# Customers
-#SET
-# City = 'Oslo';
+    @staticmethod
+    def booleanToTrue_task(id):
+        stmt = text("UPDATE task SET done = True WHERE (id = :id)"
+            ).params(id=id)
+        db.engine.execute(stmt)
+
+    @staticmethod
+    def booleanToFalse_task(id):
+        stmt = text("UPDATE task SET done = False WHERE (id = :id)"
+            ).params(id=id) 
+        db.engine.execute(stmt)
 
     @staticmethod
     def delete_task(id):
