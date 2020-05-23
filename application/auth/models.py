@@ -29,6 +29,7 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+#Näytä keillä on pakattavaa:
     @staticmethod
     def find_users_with_no_tasks(done=False):
         stmt = text("SELECT Account.id, Account.name FROM Account"

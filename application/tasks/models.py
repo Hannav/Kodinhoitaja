@@ -32,8 +32,8 @@ class Task(Base):
             ).params(id=id) 
         db.engine.execute(stmt)
 
-    #@staticmethod
-    #def modify_task(id, ???):
-        #stmt = text("UPDATE task SET name = ('???') WHERE (id = :id)"
-        #    ).params(id=id) 
-    #    db.engine.execute(stmt)
+    @staticmethod
+    def modify_task(id, name):
+        stmt = text("UPDATE task SET name = (:name) WHERE (id = :id)"
+            ).params(name=name, id=id) 
+        db.engine.execute(stmt)

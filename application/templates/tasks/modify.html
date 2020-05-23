@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('tasks_modify') }}">
+<form method="POST" action="{{ url_for('tasks_modify', task_id=task_id) }}">
   <table>
     <tr>
   <td>
@@ -19,18 +19,8 @@
   </td>
     </tr>
     <tr>
-  <td>
-    {{ form.done.label }}
-  </td>
-  <td>
-    {{ form.done }}
-  </td>
-  <td>
-  </td>
-    </tr>
-    <tr>
   <td colspan="3">
-    <input type="submit" value="Muuta nimi"/>
+    <input name="operation" type="submit" value="Muokkaa"/>
   </td>
     </tr>
 </form>

@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from werkzeug.datastructures import MultiDict
 
 from application import app, db
 from application.tasks.models import Task
 from application.tasks.forms import TaskForm, OperationForm
-
 
 @app.route("/tasks/", methods=["GET"])
 @login_required
@@ -15,11 +15,6 @@ def tasks_index():
 @login_required
 def tasks_form():
     return render_template("tasks/new.html", form = TaskForm())
-
-#@app.route("/tasks/modify/")
-#@login_required
-#def tasks_modify(task_id):
-#    return render_template("tasks/modify.html", form = TaskForm())
 
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
@@ -32,7 +27,6 @@ def tasks_operation(task_id):
         print("ERROR: OPERATIONFORM ERROR")
         print(form.data)
         print(form.errors)
-        return redirect(url_for("tasks_index"))
 
     print(form.data)
     if form.data["operation"] == 'Muuta status':
@@ -41,45 +35,25 @@ def tasks_operation(task_id):
             Task.booleanToFalse_task(task_id)
         else:
             Task.booleanToTrue_task(task_id)
-        
         db.session().commit()
 
     if form.data["operation"] == 'Poista':
         Task.delete_task(task_id)
+        return redirect(url_for("tasks_index"))
 
     if form.data["operation"] == 'Muokkaa':
+        Task.modify_task(task_id, form.data["name"])
+        db.session().commit()
         print("MUOKKAA")
-    
+
     return redirect(url_for("tasks_index"))
 
-#Miten saa tasks_delete, tasks_set_done (tai statuksen jatkuva vaihto), tasks_modify toimimaan molemmat?
-
-#@app.route("/tasks/<task_id>/", methods=["POST"])
-#@login_required
-#def tasks_boolean(task_id):
-#
-#    Task.boolean_task(task_id)
-#  
-#    return redirect(url_for("tasks_index"))
-
-#@app.route("/tasks/<task_id>/", methods=["POST"])
-#@login_required
-#def tasks_set_done(task_id):
-#muuta tasks_set_booleaniksi
-
-#    t = Task.query.get(task_id)
-#    t.done = True
-#    db.session().commit()
-#  
-#    return redirect(url_for("tasks_index"))
-
-"""@app.route("/tasks/<task_id>/", methods=["POST"])
+@app.route("/tasks/<task_id>/", methods=["GET"])
 @login_required
 def tasks_modify(task_id):
-
-    Task.modify_task(task_id)
     
-    return redirect(url_for("tasks_index"))"""
+    task = Task.query.get(task_id)
+    return render_template("tasks/modify.html", form = TaskForm(MultiDict([('name', task.name), ('done', task.done)])), task_id=task_id)
 
 @app.route("/tasks/", methods=["POST"])
 @login_required

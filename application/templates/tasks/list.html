@@ -18,8 +18,8 @@
   <form method="POST" action="{{ url_for('tasks_operation', task_id=task.id) }}">
     <input name="operation" type="submit" value="Poista"/>
   </form>
-  <form method="POST" action="{{ url_for('tasks_operation', task_id=task.id) }}">
-    <input name="operation" type="submit" value="Muokkaa"/>
+  <form method="GET" action="{{ url_for('tasks_modify', task_id=task.id) }}">
+    <input type="submit" value="Muokkaa"/>
 	</form>
       </td>
     </tr>

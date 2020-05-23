@@ -10,6 +10,7 @@ class TaskForm(FlaskForm):
 
 class OperationForm(FlaskForm):
     operation = SelectField(u'Operation', choices=[('Muuta status', 'Muuta status'), ('Poista', 'Poista'), ('Muokkaa', 'Muokkaa')])
-
+    name = StringField("Pakattava", [validators.Length(min=2)])
+    
     class Meta:
         csrf = False
