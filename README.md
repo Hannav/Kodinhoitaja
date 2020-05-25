@@ -1,7 +1,7 @@
 # Matkapakkaaja
 Matkapakkaaja on työkalu yhteisille pakkauslistoille. Käyttäjä voi luoda matkan, jolle lisää osallistujia ja jokainen osallistuja voi lisätä pakattavia tarvikkeita sekä merkitä pakkaamansa pakatuiksi.
 
-[Kodinhoitaja Herokussa](https://kodinhoitaja.herokuapp.com/)
+[Matkapakkaaja Herokussa](https://kodinhoitaja.herokuapp.com/)
 
 ## Käyttöohje
 
