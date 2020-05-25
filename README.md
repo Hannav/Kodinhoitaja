@@ -1,5 +1,5 @@
-# Kodinhoitaja
-Kotitalouden yhteinen muisti ostoslistoille sekä kotitöille. Kotiin ja mökille!
+# Matkapakkaaja
+Matkapakkaaja on työkalu yhteisille pakkauslistoille. Käyttäjä voi luoda matkan, jolle lisää osallistujia ja jokainen osallistuja voi lisätä pakattavia tarvikkeita sekä merkitä pakkaamansa pakatuiksi.
 
 [Kodinhoitaja Herokussa](https://kodinhoitaja.herokuapp.com/)
 
@@ -18,3 +18,5 @@ Kotitalouden yhteinen muisti ostoslistoille sekä kotitöille. Kotiin ja mökill
 ## CREATE TABLE-lauseet
 
 ## Rajoitteet
+
+Sama käyttäjä voi olla tällä hetkellä useampana kuin yhtenä osallistujana matkalla.
