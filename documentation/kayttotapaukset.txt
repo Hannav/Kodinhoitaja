@@ -3,10 +3,10 @@ Sisäänkirjautuminen
 Uloskirjautuminen
 
 Matkan luominen
-Käyttäjien lisääminen matkalle (voiko vain matkan luonut lisätä)
+Käyttäjän lisääminen matkalle (voiko vain matkan luonut lisätä)
 Matkan nimen muokkaaminen (voiko vain matkan luonut muokata)
 Matkan poistaminen (voiko vain matkan luonut poistaa)
-Käyttäjien poistaminen matkalta (voiko vain matkan luonut poistaa)
+Käyttäjän poistaminen matkalta (voiko vain matkan luonut poistaa)
 
 Pakattavan luominen
 Pakattavan poistaminen (voiko vain pakattavan luonut poistaa)
