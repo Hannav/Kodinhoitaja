@@ -3,6 +3,18 @@ Kotitalouden yhteinen muisti ostoslistoille sekä kotitöille. Kotiin ja mökill
 
 [Kodinhoitaja Herokussa](https://kodinhoitaja.herokuapp.com/)
 
-[Tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/tietokantakaavio.png)
+## Käyttöohje
+
+## Asennusohje
+
+## Käyttötapaukset ja niihin liittyvät SQL-kyselyt
 
 [Käyttötapaukset](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/kayttotapaukset.txt)
+
+## Tietokantarakenteen kuvaus
+
+[Tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/tietokantakaavio.png)
+
+## CREATE TABLE-lauseet
+
+## Rajoitteet
