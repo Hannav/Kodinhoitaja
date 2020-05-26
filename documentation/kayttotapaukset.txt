@@ -2,13 +2,14 @@ Käyttäjän luominen
 Sisäänkirjautuminen
 Uloskirjautuminen
 
-Matkan luominen
-Käyttäjän lisääminen matkalle (voiko vain matkan luonut lisätä)
-Matkan nimen muokkaaminen (voiko vain matkan luonut muokata)
-Matkan poistaminen (voiko vain matkan luonut poistaa)
-Käyttäjän poistaminen matkalta (voiko vain matkan luonut poistaa)
+Lisää matka (kaikki)
+Muokkaa matkan nimeä (vain matkan luonut?)
+Poista matka (vain matkan luonut?)
+Lisää käyttäjä matkalle (matkan osallistujat) -> lisää/poista checkbox-sivu "Muokkaa osallistujia"
+Poista käyttäkä matkalta (vain matkan luonut?) -> lisää/poista checkbox-sivu
 
-Pakattavan luominen
-Pakattavan poistaminen (voiko vain pakattavan luonut poistaa)
-Pakattavan muokkaaminen (voiko vain pakattavan luonut muokata)
-Pakattavan merkitseminen pakatuksi (kaikki)
+Lisää pakattava (matkan osallistujat)
+Poista pakattava (vain pakattavan luonut?)
+Muokkaa pakattavan nimeä (vain pakattavan luonut?)
+Merkitse pakattava pakatuksi (matkan osallistujat)
+Merkitse pakattava pakkaamattomaksi (matkan osallistujat)
