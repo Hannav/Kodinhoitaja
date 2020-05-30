@@ -3,8 +3,8 @@ from flask_login import login_required, current_user
 from werkzeug.datastructures import MultiDict
 
 from application import app, db
-from application.tasks.models import Task, Trip
-from application.tasks.forms import TaskForm, TaskOperationForm, TripForm, TripOperationForm
+from application.tasks.models import Task, Trip, TripParticipant
+from application.tasks.forms import TaskForm, TaskOperationForm, TripForm, TripOperationForm, TripParticipantForm
 
 @app.route("/trips/", methods=["GET"])
 @login_required
@@ -15,6 +15,27 @@ def tasks_index():
 @login_required
 def tasks_form(trip_id):
     return render_template("tasks/new.html", form = TaskForm(), trip_id=trip_id)
+
+@app.route("/trips/<trip_id>/participants/new/")
+@login_required
+def trip_participants_form(trip_id):
+    return render_template("trip_participants/new.html", form = TripParticipantForm(), trip_id=trip_id)
+
+@app.route("/trips/<trip_id>/participants/new/", methods=["POST"])
+@login_required
+def participants_add(trip_id):
+    form = TripParticipantForm(request.form)
+  
+    if not form.validate():
+        return render_template("trip_participants/new.html", form = form)
+  
+    t = TripParticipant(form.participant_id.data, trip_id)
+    t.account_id = current_user.id
+  
+    db.session().add(t)
+    db.session().commit()
+  
+    return redirect(url_for("trip_details", trip_id=trip_id))
 
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
@@ -99,16 +120,18 @@ def trips_create():
   
     return redirect(url_for("index"))
 
-# ei toimi
 @app.route("/trips/<trip_id>/", methods=["GET"])
 @login_required
 def trip_details(trip_id):
+
+#Pakattavat
 
     t = Trip.query.get(trip_id)
     if t is None:
         return redirect(url_for("index"))
     tasks = Task.query.filter_by(trip_id=t.id).all()
-    return render_template("trips/details.html", trip=t, tasks=tasks)
+    trip_participants = TripParticipant.query.filter_by(trip_id=t.id).all()
+    return render_template("trips/details.html", trip=t, tasks=tasks, trip_participants=trip_participants)
 
     form = TripOperationForm(request.form)
     
@@ -117,12 +140,23 @@ def trip_details(trip_id):
         print(form.data)
         print(form.errors)
 
-#tätä ei ole vielä olemassa eikä toimi
+    if form.data["operation"] == 'Poista':
+        Trip.delete_trip(trip_id)
+        return redirect(url_for("trips_index"))
+
+    if form.data["operation"] == 'Muokkaa nimeä':
+        Trip.modify_trip(trip_id, form.data["name"])
+        db.session().commit()
+        print("MUOKKAA")
+
+    #tätä ei ole vielä olemassa eikä toimi
     print(form.data)
     if form.data["operation"] == 'Muokkaa osallistujia':
         Trip.participants_trip(trip_id)
         db.session().commit()
         return redirect(url_for("index"))
+
+# Osallistujat
 
 #tehdäkö boolean kuten taskissa:
 #   print(form.data)
@@ -134,13 +168,6 @@ def trip_details(trip_id):
 #            Task.booleanToTrue_trip(trip_id)
 #        db.session().commit()
 
-    if form.data["operation"] == 'Poista':
-        Trip.delete_trip(trip_id)
+#trip_participants
+
         return redirect(url_for("trips_index"))
-
-    if form.data["operation"] == 'Muokkaa nimeä':
-        Trip.modify_trip(trip_id, form.data["name"])
-        db.session().commit()
-        print("MUOKKAA")
-
-    return redirect(url_for("trips_index"))

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('participants_add', trip_id=trip_id) }}">
+  <table>
+    <tr>
+  <td>
+    {{ form.participant_id.label }}
+  </td>
+  <td>
+    {{ form.participant_id }}
+  </td>
+  <td>
+    <ul>
+      {% for error in form.participant_id.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </td>
+    </tr>
+    <tr>
+  <td colspan="3">
+    <input type="submit" value="Lisää osallistuja"/>
+  </td>
+    </tr>
+</form>
+{% endblock %}

@@ -14,10 +14,24 @@ class Trip(Base):
 
 class TripParticipant(Base):
 
+    participant_id = db.Column(db.String(144))
+
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+
+    def __init__(self, participant_id, trip_id):
+        self.participant_id = participant_id
+        self.trip_id = trip_id
+
+    @staticmethod
+    def delete_participant(id):
+        stmt = text("DELETE FROM trip_participant WHERE (id = :id)"
+            ).params(id=id) 
+        db.engine.execute(stmt)
+
+"""class TripParticipant(Base):
+
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
     participant_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-
-###'Muokkaa osallistujia' participants_trip
 
     @staticmethod
     def modify_trip(id, name):
@@ -29,7 +43,7 @@ class TripParticipant(Base):
     def delete_trip(id):
         stmt = text("DELETE FROM trip WHERE (id = :id)"
             ).params(id=id) 
-        db.engine.execute(stmt)
+        db.engine.execute(stmt)"""
 
 class Task(Base):
 

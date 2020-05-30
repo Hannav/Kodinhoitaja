@@ -27,4 +27,16 @@
     {% endfor %}
   </table>
   <a href="{{ url_for('tasks_form', trip_id=trip.id) }}"><button>Lisää pakattava</button></a>
+  <table>
+    <tr>
+      <th>Osallistuja</th>
+      <th></th>
+    </tr>
+    {% for trip_participant in trip_participants %}
+    <tr>
+      <td>{{ trip_participant.participant_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('trip_participants_form', trip_id=trip.id) }}"><button>Lisää osallistuja</button></a>
 {% endblock %}

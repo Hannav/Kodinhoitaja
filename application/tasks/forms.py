@@ -27,3 +27,9 @@ class TripOperationForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class TripParticipantForm(FlaskForm):
+    participant_id = StringField("Osallistuja")
+  
+    class Meta:
+        csrf = False
