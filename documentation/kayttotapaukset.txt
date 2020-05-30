@@ -5,8 +5,8 @@ Uloskirjautuminen
 Lisää matka (kaikki)
 Muokkaa matkan nimeä (vain matkan luonut?)
 Poista matka (vain matkan luonut?)
-Lisää käyttäjä matkalle (matkan osallistujat) -> lisää/poista checkbox-sivu "Muokkaa osallistujia"
-Poista käyttäkä matkalta (vain matkan luonut?) -> lisää/poista checkbox-sivu
+Lisää käyttäjä matkalle (matkan osallistujat) -> lisää/poista dropdown & poista-nappi
+Poista käyttäkä matkalta (vain matkan luonut?) -> lisää/poista
 
 Lisää pakattava (matkan osallistujat)
 Poista pakattava (vain pakattavan luonut?)
