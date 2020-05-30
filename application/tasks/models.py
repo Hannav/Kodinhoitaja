@@ -22,28 +22,12 @@ class TripParticipant(Base):
         self.participant_id = participant_id
         self.trip_id = trip_id
 
+##ei id = :id!!! korjaa!
     @staticmethod
     def delete_participant(id):
         stmt = text("DELETE FROM trip_participant WHERE (id = :id)"
             ).params(id=id) 
         db.engine.execute(stmt)
-
-"""class TripParticipant(Base):
-
-    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
-    participant_id = db.Column(db.Integer, db.ForeignKey('account.id'))
-
-    @staticmethod
-    def modify_trip(id, name):
-        stmt = text("UPDATE trip SET name = (:name) WHERE (id = :id)"
-            ).params(name=name, id=id) 
-        db.engine.execute(stmt)
-
-    @staticmethod
-    def delete_trip(id):
-        stmt = text("DELETE FROM trip WHERE (id = :id)"
-            ).params(id=id) 
-        db.engine.execute(stmt)"""
 
 class Task(Base):
 
