@@ -3,16 +3,46 @@ from application.models import Base
 
 from sqlalchemy.sql import text
 
+class Trip(Base):
+
+    name = db.Column(db.String(144))
+
+    owner_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+
+    def __init__(self, name):
+        self.name = name
+
+class TripParticipant(Base):
+
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+    participant_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+
+###'Muokkaa osallistujia' participants_trip
+
+    @staticmethod
+    def modify_trip(id, name):
+        stmt = text("UPDATE trip SET name = (:name) WHERE (id = :id)"
+            ).params(name=name, id=id) 
+        db.engine.execute(stmt)
+
+    @staticmethod
+    def delete_trip(id):
+        stmt = text("DELETE FROM trip WHERE (id = :id)"
+            ).params(id=id) 
+        db.engine.execute(stmt)
+
 class Task(Base):
 
     name = db.Column(db.String(144), nullable=False)
     done = db.Column(db.Boolean, nullable=False)
 
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    packer_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'), nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name, trip_id):
         self.name = name
         self.done = False
+        self.trip_id = trip_id
 
     @staticmethod
     def booleanToTrue_task(id):

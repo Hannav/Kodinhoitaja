@@ -19,7 +19,7 @@ def auth_login():
         return render_template("auth/loginform.html", form = form,
                                 error = "Virheellinen käyttäjätunnus tai salasana")
                                 
-    login_user(user)
+    login_user(user, remember=True)
     return redirect(url_for("index"))
 
 @app.route("/auth/logout")
@@ -42,5 +42,5 @@ def auth_create():
         return render_template("auth/createform.html", form = form,
                                 error = "Käyttäjätunnuksen luominen ei onnistunut")
     
-    login_user(user)
+    login_user(user, remember=True)
     return redirect(url_for("index"))

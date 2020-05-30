@@ -8,9 +8,22 @@ class TaskForm(FlaskForm):
     class Meta:
         csrf = False
 
-class OperationForm(FlaskForm):
+class TaskOperationForm(FlaskForm):
     operation = SelectField(u'Operation', choices=[('Muuta status', 'Muuta status'), ('Poista', 'Poista'), ('Muokkaa', 'Muokkaa')])
     name = StringField("Pakattava", [validators.Length(min=2)])
-    
+
+    class Meta:
+        csrf = False
+
+class TripForm(FlaskForm):
+    name = StringField("Matkan nimi", [validators.Length(min=2)])
+
+    class Meta:
+        csrf = False
+
+class TripOperationForm(FlaskForm):
+    operation = SelectField(u'Operation', choices=[('Muokkaa osallistujia', 'Muokkaa osallistujia'), ('Poista', 'Poista'), ('Muokkaa nimeä', 'Muokkaa nimeä')])
+    name = StringField("Matka", [validators.Length(min=2)])
+
     class Meta:
         csrf = False

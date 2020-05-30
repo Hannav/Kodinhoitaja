@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('tasks_create', trip_id=trip_id) }}">
+<form method="POST" action="{{ url_for('trips_create', trip_id=trip_id) }}">
   <table>
     <tr>
   <td>
@@ -19,18 +19,8 @@
   </td>
     </tr>
     <tr>
-  <td>
-    {{ form.done.label }}
-  </td>
-  <td>
-    {{ form.done }}
-  </td>
-  <td>
-  </td>
-    </tr>
-    <tr>
   <td colspan="3">
-    <input type="submit" value="Lisää pakattava"/>
+    <input type="submit" value="Lisää matka"/>
   </td>
     </tr>
 </form>

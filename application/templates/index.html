@@ -2,22 +2,15 @@
 
 {% block body %}
 <p>
-  Tervetuloa!
+  Matkat:
 </p>
 
-{% if needs_tasks is defined %}
+{% for trip in trips %}
 <p>
-  Tekemistä on seuraaville:
+  <a href="{{ url_for('trip_details', trip_id=trip.id) }}">{{trip.name}}</a>
 </p>
+{% endfor %}
 
-<ul>
-  {% for user in needs_tasks %}
-  <li>
-    {{user.id}} {{user.name}}
-  </li>
-  {% endfor %}
-</ul>
-
-{% endif %}
+<a href="{{ url_for('trip_form') }}"><button>Lisää matka</button></a>
 
 {% endblock %}

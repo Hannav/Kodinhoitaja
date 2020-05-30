@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<h2>{{trip.name}}</h2>
   <table>
     <tr>
       <th>Pakattava</th>
@@ -25,4 +26,5 @@
     </tr>
     {% endfor %}
   </table>
+  <a href="{{ url_for('tasks_form', trip_id=trip.id) }}"><button>Lisää pakattava</button></a>
 {% endblock %}
