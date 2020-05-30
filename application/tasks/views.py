@@ -124,7 +124,7 @@ def trips_create():
 @login_required
 def trip_details(trip_id):
 
-#Pakattavat
+#Pakattavien
 
     t = Trip.query.get(trip_id)
     if t is None:
