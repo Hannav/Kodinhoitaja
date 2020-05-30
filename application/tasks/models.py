@@ -14,7 +14,7 @@ class Trip(Base):
 
 class TripParticipant(Base):
 
-    participant_id = db.Column(db.String(144))
+    participant_id = db.Column(db.Integer, db.ForeignKey('account.id'))
 
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
 
