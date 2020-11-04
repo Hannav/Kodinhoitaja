@@ -34,7 +34,7 @@
     </tr>
     {% for trip_participant in trip_participants %}
     <tr>
-      <td>{{ trip_participant.participant_id }}</td>
+      <td>{{ trip_participant.participant.username }}</td>
     </tr>
     {% endfor %}
   </table>

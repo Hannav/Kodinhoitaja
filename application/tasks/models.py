@@ -2,6 +2,7 @@ from application import db
 from application.models import Base
 
 from sqlalchemy.sql import text
+from sqlalchemy.orm import relationship
 
 class Trip(Base):
 
@@ -17,6 +18,8 @@ class TripParticipant(Base):
     participant_id = db.Column(db.Integer, db.ForeignKey('account.id'))
 
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
+
+    participant = relationship("User")
 
     def __init__(self, participant_id, trip_id):
         self.participant_id = participant_id

@@ -1,5 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, validators, SelectField
+from wtforms.validators import ValidationError
+from application.auth.models import User
 
 class TaskForm(FlaskForm):
     name = StringField("Pakattava", [validators.Length(min=2)])
@@ -33,3 +35,8 @@ class TripParticipantForm(FlaskForm):
   
     class Meta:
         csrf = False
+
+    def validate_participant_id(form, field):
+        user = User.query.filter_by(username=field.data).first()
+        if not user:
+            raise ValidationError("Käyttäjää ei löydy!")

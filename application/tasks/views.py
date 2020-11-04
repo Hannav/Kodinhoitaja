@@ -5,6 +5,7 @@ from werkzeug.datastructures import MultiDict
 from application import app, db
 from application.tasks.models import Task, Trip, TripParticipant
 from application.tasks.forms import TaskForm, TaskOperationForm, TripForm, TripOperationForm, TripParticipantForm
+from application.auth.models import User
 
 @app.route("/trips/", methods=["GET"])
 @login_required
@@ -26,16 +27,16 @@ def trip_participants_form(trip_id):
 def participants_add(trip_id):
     form = TripParticipantForm(request.form)
   
-    if not form.validate():
-        return render_template("trip_participants/new.html", form = form)
+    if request.method=="POST" and form.validate():
+        t = TripParticipant(User.query.filter_by(username=form.participant_id.data).first().id, trip_id)
+        t.account_id = current_user.id
   
-    t = TripParticipant(form.participant_id.data, trip_id)
-    t.account_id = current_user.id
-  
-    db.session().add(t)
-    db.session().commit()
-  
-    return redirect(url_for("trip_details", trip_id=trip_id))
+        db.session().add(t)
+        db.session().commit()
+    
+        return redirect(url_for("trip_details", trip_id=trip_id))
+
+    return render_template("trip_participants/new.html", form = form, trip_id=trip_id)
 
 @app.route("/tasks/<task_id>/", methods=["POST"])
 @login_required
