@@ -46,4 +46,9 @@
     {% endfor %}
   </table>
   <a href="{{ url_for('trip_participants_form', trip_id=trip.id) }}"><button>Lisää osallistuja</button></a>
+  {% if is_owner %}
+    <form method="POST" action="{{ url_for('trip_delete', trip_id=trip.id) }}">
+      <input name="operation" type="submit" value="Poista matka"/>
+    </form>
+  {% endif %}
 {% endblock %}

@@ -28,7 +28,7 @@ def trip_participants_form(trip_id):
 def participant_delete(participant_id):
 
     participant = TripParticipant.query.get(participant_id)
-    if participant.trip.id != current_user.id:
+    if participant.trip.owner_id != current_user.id:
         return "Ei onnistu"
 
     db.session().delete(participant)
@@ -176,18 +176,18 @@ def trip_details(trip_id):
         db.session().commit()
         return redirect(url_for("index"))
 
-# Osallistujat
+    return redirect(url_for("trips_index"))
 
-#tehdäkö boolean kuten taskissa:
-#   print(form.data)
-#    if form.data["operation"] == 'Osallistuuko':
-#        print(t.done)
-#        if t.done == True:
-#            Task.booleanToFalse_trip(trip_id)
-#        else:
-#            Task.booleanToTrue_trip(trip_id)
-#        db.session().commit()
+@app.route("/trips/<trip_id>/delete/", methods=["POST"])
+@login_required
+def trip_delete(trip_id):
 
-#trip_participants
+    trip = Trip.query.get(trip_id)
+    if trip.owner_id != current_user.id:
+        return "Ei onnistu"
 
-        return redirect(url_for("trips_index"))
+    db.session().delete(trip)
+
+    db.session().commit()
+
+    return redirect(url_for("index"))
