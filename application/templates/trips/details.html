@@ -35,6 +35,13 @@
     {% for trip_participant in trip_participants %}
     <tr>
       <td>{{ trip_participant.participant.username }}</td>
+      {% if is_owner %}
+      <td>
+        <form method="POST" action="{{ url_for('participant_delete', participant_id=trip_participant.id) }}">
+          <input name="operation" type="submit" value="Poista"/>
+        </form>
+      </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </table>

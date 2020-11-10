@@ -23,6 +23,20 @@ def tasks_form(trip_id):
 def trip_participants_form(trip_id):
     return render_template("trip_participants/new.html", form = TripParticipantForm(), trip_id=trip_id)
 
+@app.route("/participant/<participant_id>/delete/", methods=["POST"])
+@login_required
+def participant_delete(participant_id):
+
+    participant = TripParticipant.query.get(participant_id)
+    if participant.trip.id != current_user.id:
+        return "Ei onnistu"
+
+    db.session().delete(participant)
+
+    db.session().commit()
+
+    return redirect(url_for("trip_details", trip_id=participant.trip.id))
+
 @app.route("/trips/<trip_id>/participants/new/", methods=["POST"])
 @login_required
 def participants_add(trip_id):
@@ -45,7 +59,6 @@ def tasks_operation(task_id):
 
     form = TaskOperationForm(request.form)
     t = Task.query.get(task_id)
-    print("MUUMI")
     print(t.trip_id)
     
     if not form.validate():
@@ -134,7 +147,11 @@ def trip_details(trip_id):
         return redirect(url_for("index"))
     tasks = Task.query.filter_by(trip_id=t.id).all()
     trip_participants = TripParticipant.query.filter_by(trip_id=t.id).all()
-    return render_template("trips/details.html", trip=t, tasks=tasks, trip_participants=trip_participants)
+    is_owner = current_user.id == t.owner_id
+    return render_template(
+        "trips/details.html", trip=t, tasks=tasks, trip_participants=trip_participants,
+        is_owner=is_owner
+    )
 
     form = TripOperationForm(request.form)
     
