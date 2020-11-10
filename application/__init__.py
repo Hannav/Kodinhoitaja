@@ -24,7 +24,7 @@ from application.auth import views
 # login
 from application.auth.models import User
 from os import urandom
-app.config["SECRET_KEY"] = urandom(32)
+app.config["SECRET_KEY"] = os.environ.get("SECURE_KEY") or "development"
 
 from flask_login import LoginManager
 login_manager = LoginManager()
