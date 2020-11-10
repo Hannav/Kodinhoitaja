@@ -20,6 +20,7 @@ class TripParticipant(Base):
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
 
     participant = relationship("User")
+    trip = relationship("Trip", backref = "participants")
 
     def __init__(self, participant_id, trip_id):
         self.participant_id = participant_id

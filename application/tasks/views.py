@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from werkzeug.datastructures import MultiDict
+from sqlalchemy import or_
 
 from application import app, db
 from application.tasks.models import Task, Trip, TripParticipant
@@ -98,7 +99,8 @@ def tasks_create(trip_id):
 @app.route('/')
 @login_required
 def index():
-    return render_template("index.html", trips=Trip.query.order_by(Trip.date_modified.desc()).all())
+    trips = Trip.query.filter(or_(Trip.owner_id==current_user.id,Trip.participants.any(TripParticipant.participant_id==current_user.id)))
+    return render_template("index.html", trips=trips.order_by(Trip.date_modified.desc()))
 
 @app.route("/trips/new/")
 @login_required
