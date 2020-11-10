@@ -41,9 +41,13 @@ def participant_delete(participant_id):
 @login_required
 def participants_add(trip_id):
     form = TripParticipantForm(request.form)
-  
+    trip = Trip.query.get(trip_id)
+
     if request.method=="POST" and form.validate():
-        t = TripParticipant(User.query.filter_by(username=form.participant_id.data).first().id, trip_id)
+        user = User.query.filter_by(username=form.participant_id.data).first()
+        if TripParticipant.query.filter_by(participant=user, trip=trip).count():
+            return redirect(url_for("trip_details", trip_id=trip_id))
+        t = TripParticipant(user.id, trip_id)
         t.account_id = current_user.id
   
         db.session().add(t)
