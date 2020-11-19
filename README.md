@@ -13,9 +13,9 @@ Matkapakkaaja on työkalu yhteisille pakkauslistoille. Käyttäjä voi luoda mat
 
 ## Tietokantarakenteen kuvaus
 
-[Tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/tietokantakaavio.png)
+* [Tietokantakaavio](https://github.com/Hannav/Kodinhoitaja/blob/master/documentation/tietokantakaavio.png)
 
-## CREATE TABLE-lauseet
+* CREATE TABLE-lauseet
 
 ```
 CREATE TABLE account (
@@ -59,5 +59,3 @@ CREATE TABLE task (
         trip_id INTEGER NOT NULL, PRIMARY KEY (id), CHECK (done IN (0, 1)), FOREIGN KEY(packer_id) REFERENCES account (id), FOREIGN KEY(trip_id) REFERENCES trip (id)
 )
 ```
-
-## Rajoitteet
