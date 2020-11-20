@@ -32,7 +32,7 @@ CREATE TABLE trip_participant (
 ```
 
 ```
-CREATE TABLE item (
+CREATE TABLE task (
         id INTEGER NOT NULL,
         date_created DATETIME,
         date_modified DATETIME,
