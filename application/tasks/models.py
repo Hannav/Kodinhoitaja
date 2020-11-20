@@ -20,13 +20,12 @@ class TripParticipant(Base):
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'))
 
     participant = relationship("User")
-    trip = relationship("Trip", backref = "participants")
+    trip = relationship("Trip", backref="participants")
 
     def __init__(self, participant_id, trip_id):
         self.participant_id = participant_id
         self.trip_id = trip_id
 
-##ei id = :id!!! korjaa!
     @staticmethod
     def delete_participant(id):
         stmt = text("DELETE FROM trip_participant WHERE (id = :id)"
@@ -40,6 +39,7 @@ class Task(Base):
 
     packer_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'), nullable=False)
+    trip = relationship("Trip", backref="tasks")
 
     def __init__(self, name, trip_id):
         self.name = name

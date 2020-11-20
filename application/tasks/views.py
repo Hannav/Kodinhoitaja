@@ -144,8 +144,6 @@ def trips_create():
 @login_required
 def trip_details(trip_id):
 
-#Pakattavien
-
     t = Trip.query.get(trip_id)
     if t is None:
         return redirect(url_for("index"))
@@ -190,8 +188,10 @@ def trip_delete(trip_id):
     if trip.owner_id != current_user.id:
         return "Ei onnistu"
 
-    db.session().delete(trip)
+    session = db.session()
+    session.query(Task).filter(Task.trip_id==trip.id).delete()
+    session.delete(trip)
 
-    db.session().commit()
+    session.commit()
 
     return redirect(url_for("index"))
