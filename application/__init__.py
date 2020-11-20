@@ -13,15 +13,12 @@ else:
   
 db = SQLAlchemy(app)
 
-from application import views
-
 from application.tasks import models
 from application.tasks import views
 
 from application.auth import models
 from application.auth import views
 
-# login
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = os.environ.get("SECURE_KEY") or "development"

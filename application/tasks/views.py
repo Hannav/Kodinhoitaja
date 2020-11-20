@@ -155,31 +155,6 @@ def trip_details(trip_id):
         is_owner=is_owner
     )
 
-    form = TripOperationForm(request.form)
-    
-    if not form.validate():
-        print("ERROR: *TRIP*OPERATIONFORM ERROR")
-        print(form.data)
-        print(form.errors)
-
-    if form.data["operation"] == 'Poista':
-        Trip.delete_trip(trip_id)
-        return redirect(url_for("trips_index"))
-
-    if form.data["operation"] == 'Muokkaa nimeä':
-        Trip.modify_trip(trip_id, form.data["name"])
-        db.session().commit()
-        print("MUOKKAA")
-
-    #tätä ei ole vielä olemassa eikä toimi
-    print(form.data)
-    if form.data["operation"] == 'Muokkaa osallistujia':
-        Trip.participants_trip(trip_id)
-        db.session().commit()
-        return redirect(url_for("index"))
-
-    return redirect(url_for("trips_index"))
-
 @app.route("/trips/<trip_id>/delete/", methods=["POST"])
 @login_required
 def trip_delete(trip_id):

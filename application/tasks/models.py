@@ -26,12 +26,6 @@ class TripParticipant(Base):
         self.participant_id = participant_id
         self.trip_id = trip_id
 
-    @staticmethod
-    def delete_participant(id):
-        stmt = text("DELETE FROM trip_participant WHERE (id = :id)"
-            ).params(id=id) 
-        db.engine.execute(stmt)
-
 class Task(Base):
 
     name = db.Column(db.String(144), nullable=False)

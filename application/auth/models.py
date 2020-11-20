@@ -7,7 +7,6 @@ class User(Base):
 
     __tablename__ = "account"
 
-#create table-lauseet:
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
