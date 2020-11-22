@@ -1,5 +1,5 @@
 # Matkapakkaaja
-Matkapakkaaja on työkalu yhteisille pakkauslistoille. Käyttäjä voi luoda matkan, jolle lisää osallistujia ja jokainen osallistuja voi lisätä listalle pakattavia tarvikkeita ja matkaa varten hoidettavia asioita sekä merkitä pakkaamansa pakatuiksi tai pakkaamattomiksi ja hoidettavat asiat hoidetuiksi tai hoitamattomiksi.
+Matkapakkaaja on työkalu yhteisille pakkauslistoille. Käyttäjä voi luoda matkan, jolle lisää osallistujia. Jokainen osallistuja voi lisätä listalle pakattavia tarvikkeita ja matkaa varten hoidettavia asioita sekä merkitä pakkaamansa pakatuiksi tai pakkaamattomiksi ja hoidettavat asiat hoidetuiksi tai hoitamattomiksi.
 
 * [Heroku](https://matkapakkaaja.herokuapp.com/)
 * [Asennusohje](https://github.com/Hannav/Matkapakkaaja/blob/master/documentation/asennusohje.md)
