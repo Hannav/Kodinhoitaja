@@ -102,7 +102,7 @@ def tasks_create(trip_id):
     form = TaskForm(request.form)
   
     if not form.validate():
-        return render_template("tasks/new.html", form = form)
+        return render_template("tasks/new.html", form=form, trip_id=trip_id)
   
     t = Task(form.name.data, trip_id)
     t.done = form.done.data
